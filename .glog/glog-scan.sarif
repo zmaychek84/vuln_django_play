@@ -1,0 +1,605 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
+              "name": "resources.rules.python.xss-render-method",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.xss-render-method"
+              },
+              "fullDescription": {
+                "text": "XSS"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "XSS\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "XSS\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "541ed21d-e25c-3962-944e-84fad2b8e44b",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "faaac48b-e09e-3c39-906c-cfda2ad85f71",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
+              "name": "resources.rules.python.direct-use-of-httpresponse",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.direct-use-of-httpresponse"
+              },
+              "fullDescription": {
+                "text": "Detected data rendered directly to the end user via 'HttpResponse'\nor a similar object. This bypasses Django's built-in cross-site scripting\n(XSS) defenses and could result in an XSS vulnerability. Use Django's\ntemplate engine to safely render HTML.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Detected data rendered directly to the end user via 'HttpResponse'\nor a similar object. This bypasses Django's built-in cross-site scripting\n(XSS) defenses and could result in an XSS vulnerability. Use Django's\ntemplate engine to safely render HTML.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected data rendered directly to the end user via 'HttpResponse'\nor a similar object. This bypasses Django's built-in cross-site scripting\n(XSS) defenses and could result in an XSS vulnerability. Use Django's\ntemplate engine to safely render HTML.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://docs.djangoproject.com/en/3.1/intro/tutorial03/#a-shortcut-render](https://docs.djangoproject.com/en/3.1/intro/tutorial03/#a-shortcut-render)\n - [https://docs.djangoproject.com/en/3.1/topics/http/shortcuts/#render](https://docs.djangoproject.com/en/3.1/topics/http/shortcuts/#render)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "793d0960-62fd-3bfa-a339-cc9787415070",
+              "name": "python.django.security.audit.csrf-exempt.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: python.django.security.audit.csrf-exempt.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "helpUri": "https://semgrep.dev/r/python.django.security.audit.csrf-exempt.no-csrf-exempt",
+              "help": {
+                "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.django.security.audit.csrf-exempt.no-csrf-exempt)\n - [https://owasp.org/Top10/A01_2021-Broken_Access_Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "f6772744-842c-3274-81e4-6d921f7ab217",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "4b89bd9f-3874-34d3-974c-1c35e38d992f",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "228f29c9-3627-3e05-94dc-b30e7bf3d2c4",
+              "name": "resources.rules.python.sql-injection-db-cursor-execute",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.sql-injection-db-cursor-execute"
+              },
+              "fullDescription": {
+                "text": "Data from request is passed to execute(). This is a SQL injection and could be exploited. See https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection to learn how to mitigate. See https://cwe.mitre.org/data/definitions/89.html to learn about SQLi."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Data from request is passed to execute(). This is a SQL injection and could be exploited. See https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection to learn how to mitigate. See https://cwe.mitre.org/data/definitions/89.html to learn about SQLi.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Data from request is passed to execute(). This is a SQL injection and could be exploited. See https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection to learn how to mitigate. See https://cwe.mitre.org/data/definitions/89.html to learn about SQLi.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection](https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "4047b11f-b4db-3de8-8932-a52713c7f1ef",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "d770ea6c-f20e-3971-9419-a5b9cd111d48",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "541ed21d-e25c-3962-944e-84fad2b8e44b",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'index' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 1,
+                  "endLine": 49,
+                  "endColumn": 56,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef index(request):\n    latest_question_list = Question.objects.order_by('-pub_date')[:5]\n    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "ab797ce1d17d394d9c68c66a5311203754e8b8e9efd8e67bf7723b252c5223e4cff3094c2fe0ef2ae82bf866e32237a27c1d730e37907954eea08f0dbc84c5e7_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "XSS"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 5,
+                  "endLine": 49,
+                  "endColumn": 56,
+                  "snippet": {
+                    "text": "    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "1072e0307d73e70b0ca8214a8a75631e14431a277dbd042e58bb7abe1d18bd943f491ba40450208a62f18dcdcd7e6c70e4db607c51bb2b7fb90fbfa169a18c26_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "faaac48b-e09e-3c39-906c-cfda2ad85f71",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'detail' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 1,
+                  "endLine": 55,
+                  "endColumn": 73,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef detail(request, question_id):\n    question = get_object_or_404(Question, pk=question_id)\n    return render(request, 'polls/results.html', {'question': question})"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "9fece1667ace98e2bd25f1573cda1da9405ad5ccbb35edacf255cd3516f4ae5cc9a7df48dfda7b3eb941be294b5aec55f34715db111c742aa9e131e7dcd345c6_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 1,
+                  "endLine": 61,
+                  "endColumn": 48,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef results(request, question_id):\n    response = \"You're looking at the results of question %s.\"\n    return HttpResponse(response % question_id)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "da1d7014865b7f0c074855bcb1fc7bfb1cdea05c65d87e92a55e6dec3fdf12d44a509e3e0d378ca3222cb96043a64f1a8dd843df63dfd1b24127bc9909378f61_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected data rendered directly to the end user via 'HttpResponse' or a similar object. This bypasses Django's built-in cross-site scripting (XSS) defenses and could result in an XSS vulnerability. Use Django's template engine to safely render HTML."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 61,
+                  "startColumn": 12,
+                  "endLine": 61,
+                  "endColumn": 48,
+                  "snippet": {
+                    "text": "    return HttpResponse(response % question_id)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "6604e0dad5def212a0d78b858ae8fd84a079964ca7007bdc4537161efaf548f1bc64278e3313a21688089e0e9db368212c929124c98929f158b3dd4cfb5db3db_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "793d0960-62fd-3bfa-a339-cc9787415070",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'vote' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 1,
+                  "endLine": 81,
+                  "endColumn": 83,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef vote(request, question_id):\n    question = get_object_or_404(Question, pk=question_id)\n    try:\n        selected_choice = question.choice_set.get(pk=request.POST['choice'])\n    except (KeyError, Choice.DoesNotExist):\n        # redisplay the question voting form\n        return render(request, 'polls/detail.html', {\n            'question': question,\n            'error_message': \"You didn't select a choice.\",\n        })\n    else:\n        selected_choice.votes += 1\n        selected_choice.save()\n        # Always return an HttpResponseRedirect after successfully dealing\n        # with POST data. This prevents the data from being posted twice if a\n        # user hist the Back button\n        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "3070be51fb32d75f227088172d5584b9ad942ba3b3604f1bdf1c2deb1b1f3d46d623bc2bf0f9e866aaa1ebfa7ec0cf9772f412cd7a1ab91063d35b6d4a039423_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "f6772744-842c-3274-81e4-6d921f7ab217",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'inject' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 84,
+                  "startColumn": 1,
+                  "endLine": 89,
+                  "endColumn": 7,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef inject(request, injector_str):\n    response = \"You're looking at the page that handles injection of %s\"\n    return render(request, 'polls/injector.html', {\n        'injector_str': unquote(injector_str),\n    })"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "c3ed59d1f7026838d8f2ea05e7b3db6cb408c529cdc4d6285eec5b012f67b2d56cba360878ebe96f21c04b1316bd2564514b68482610bae52eae27cd5d9b32ac_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "4b89bd9f-3874-34d3-974c-1c35e38d992f",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 1,
+                  "endLine": 103,
+                  "endColumn": 7,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef sql_injector(request, ):\n    sql_str = request.GET.get('sql')\n    prepared_sql = request.GET['sql']\n    cursor = connection.cursor()\n    cursor.execute(prepared_sql)\n    sql_results = cursor.fetchall()\n    cursor.close()\n    return render(request, 'polls/sequeleye.html', {\n        'sql_str': sql_str,\n        'sql_results': sql_results,\n    }) #HttpResponse(\"Ohh, my DB info, yeah it's here: \" + str(sql_results))"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "71739d3249b6f8c2fa70e6ffd177192ff4ff2388b7c639fb4ca8cec18a61e1206f927678b1f62c2c78c7641aeff57942e19cf3d62c170eb132235a66a4a3358e_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "228f29c9-3627-3e05-94dc-b30e7bf3d2c4",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "User-controlled data from a request is passed to 'execute()'. This could lead to a SQL injection and therefore protected information could be leaked. Instead, use django's QuerySets, which are built with query parameterization and therefore not vulnerable to sql injection. For example, you could use `Entry.objects.filter(date=2006)`."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 95,
+                  "startColumn": 5,
+                  "endLine": 97,
+                  "endColumn": 33,
+                  "snippet": {
+                    "text": "    prepared_sql = request.GET['sql']\n    cursor = connection.cursor()\n    cursor.execute(prepared_sql)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "b1ae8822951d4511ba0e2f0c53dec77ee005acf716230852b17a60248373f6bbecd85a768f45b758d6147b9786bef7e0b2cc4ef11ffad12b52af98358d366d2d_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "4047b11f-b4db-3de8-8932-a52713c7f1ef",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 106,
+                  "startColumn": 1,
+                  "endLine": 109,
+                  "endColumn": 87,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef search(request, ):\n    search_str = request.POST.get('search_string', 'found nothing in search')\n    return render(request, 'polls/search_detail.html', {'search_string': search_str,})"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "3dd9d2cc2f0b862196d91252b2181e49977737c00febe887a183fbf9dc82c487821bc55c7406b51eae532960dccffaf436fe09ede57eb35aed676f76105ca203_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "d770ea6c-f20e-3971-9419-a5b9cd111d48",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vuln_django/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 1,
+                  "endLine": 13,
+                  "endColumn": 42,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef redirect_to_polls(request, ):\n    return HttpResponseRedirect('/polls')"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "e4e081bd5bab9123b43ad8a376b8e4c8f09dc6aff231a2d46a5515785b64f548c752fc8acfd361c29147fb324dc47c331c1a236ddfaecd8ed2e4dd116b600d62_0"
+          },
+          "properties": {}
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
