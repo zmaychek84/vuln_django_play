@@ -75,27 +75,6 @@
               }
             },
             {
-              "id": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
-              "name": "resources.rules.python.no-csrf-exempt",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
-              },
-              "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
-              "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
               "id": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
               "name": "resources.rules.python.direct-use-of-httpresponse",
               "shortDescription": {
@@ -117,22 +96,63 @@
               }
             },
             {
-              "id": "793d0960-62fd-3bfa-a339-cc9787415070",
-              "name": "python.django.security.audit.csrf-exempt.no-csrf-exempt",
+              "id": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
+              "name": "resources.rules.python.missing-ratelimit",
               "shortDescription": {
-                "text": "Opengrep Finding: python.django.security.audit.csrf-exempt.no-csrf-exempt"
+                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
               },
               "fullDescription": {
-                "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
               },
               "defaultConfiguration": {
                 "enabled": true,
                 "level": "warning"
               },
-              "helpUri": "https://semgrep.dev/r/python.django.security.audit.csrf-exempt.no-csrf-exempt",
               "help": {
-                "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [Semgrep Rule](https://semgrep.dev/r/python.django.security.audit.csrf-exempt.no-csrf-exempt)\n - [https://owasp.org/Top10/A01_2021-Broken_Access_Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)\n"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
+              "name": "resources.rules.python.no-csrf-exempt",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+              },
+              "fullDescription": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+              },
+              "properties": {
+                "precision": "very-high"
+              }
+            },
+            {
+              "id": "793d0960-62fd-3bfa-a339-cc9787415070",
+              "name": "resources.rules.python.missing-ratelimit",
+              "shortDescription": {
+                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
+              },
+              "fullDescription": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+              },
+              "defaultConfiguration": {
+                "enabled": true,
+                "level": "warning"
+              },
+              "help": {
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -161,20 +181,20 @@
             },
             {
               "id": "4b89bd9f-3874-34d3-974c-1c35e38d992f",
-              "name": "resources.rules.python.no-csrf-exempt",
+              "name": "resources.rules.python.missing-ratelimit",
               "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
               },
               "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
               },
               "defaultConfiguration": {
                 "enabled": true,
                 "level": "warning"
               },
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -203,20 +223,20 @@
             },
             {
               "id": "4047b11f-b4db-3de8-8932-a52713c7f1ef",
-              "name": "resources.rules.python.no-csrf-exempt",
+              "name": "resources.rules.python.missing-ratelimit",
               "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
               },
               "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
               },
               "defaultConfiguration": {
                 "enabled": true,
                 "level": "warning"
               },
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -224,20 +244,20 @@
             },
             {
               "id": "d770ea6c-f20e-3971-9419-a5b9cd111d48",
-              "name": "resources.rules.python.no-csrf-exempt",
+              "name": "resources.rules.python.missing-ratelimit",
               "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
+                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
               },
               "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
               },
               "defaultConfiguration": {
                 "enabled": true,
                 "level": "warning"
               },
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
+                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
               },
               "properties": {
                 "precision": "very-high"
@@ -254,37 +274,6 @@
       },
       "language": "en-US",
       "results": [
-        {
-          "ruleId": "541ed21d-e25c-3962-944e-84fad2b8e44b",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Function 'index' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "polls/views.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 45,
-                  "startColumn": 1,
-                  "endLine": 49,
-                  "endColumn": 56,
-                  "snippet": {
-                    "text": "@csrf_exempt\ndef index(request):\n    latest_question_list = Question.objects.order_by('-pub_date')[:5]\n    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "ab797ce1d17d394d9c68c66a5311203754e8b8e9efd8e67bf7723b252c5223e4cff3094c2fe0ef2ae82bf866e32237a27c1d730e37907954eea08f0dbc84c5e7_0"
-          },
-          "properties": {}
-        },
         {
           "ruleId": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
           "kind": "fail",
@@ -313,6 +302,37 @@
           ],
           "fingerprints": {
             "matchBasedId/v1": "1072e0307d73e70b0ca8214a8a75631e14431a277dbd042e58bb7abe1d18bd943f491ba40450208a62f18dcdcd7e6c70e4db607c51bb2b7fb90fbfa169a18c26_0"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "541ed21d-e25c-3962-944e-84fad2b8e44b",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'index' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 1,
+                  "endLine": 49,
+                  "endColumn": 56,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef index(request):\n    latest_question_list = Question.objects.order_by('-pub_date')[:5]\n    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "ab797ce1d17d394d9c68c66a5311203754e8b8e9efd8e67bf7723b252c5223e4cff3094c2fe0ef2ae82bf866e32237a27c1d730e37907954eea08f0dbc84c5e7_0"
           },
           "properties": {}
         },
@@ -348,37 +368,6 @@
           "properties": {}
         },
         {
-          "ruleId": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "polls/views.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 58,
-                  "startColumn": 1,
-                  "endLine": 61,
-                  "endColumn": 48,
-                  "snippet": {
-                    "text": "@csrf_exempt\ndef results(request, question_id):\n    response = \"You're looking at the results of question %s.\"\n    return HttpResponse(response % question_id)"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "da1d7014865b7f0c074855bcb1fc7bfb1cdea05c65d87e92a55e6dec3fdf12d44a509e3e0d378ca3222cb96043a64f1a8dd843df63dfd1b24127bc9909378f61_0"
-          },
-          "properties": {}
-        },
-        {
           "ruleId": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
           "kind": "fail",
           "level": "warning",
@@ -410,11 +399,42 @@
           "properties": {}
         },
         {
+          "ruleId": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Function 'results' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 1,
+                  "endLine": 61,
+                  "endColumn": 48,
+                  "snippet": {
+                    "text": "@csrf_exempt\ndef results(request, question_id):\n    response = \"You're looking at the results of question %s.\"\n    return HttpResponse(response % question_id)"
+                  }
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "matchBasedId/v1": "5b79b2ed2fa1db7cd803042a99380c0062546f96c5e47edbf1bfd5fd00a519331eeafb22e5dc9e5b4508076d8ba800f5dd5bb56b22347ad2807fc6080942212f_0"
+          },
+          "properties": {}
+        },
+        {
           "ruleId": "793d0960-62fd-3bfa-a339-cc9787415070",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Function 'vote' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
           },
           "locations": [
             {
@@ -436,7 +456,7 @@
             }
           ],
           "fingerprints": {
-            "matchBasedId/v1": "3070be51fb32d75f227088172d5584b9ad942ba3b3604f1bdf1c2deb1b1f3d46d623bc2bf0f9e866aaa1ebfa7ec0cf9772f412cd7a1ab91063d35b6d4a039423_0"
+            "matchBasedId/v1": "83b0ed1022698caee0021eb4eba3703bfd0e43da6d9c8f94ed8e42a66ff897abc118cfab2e63c9bb11ec6de5b5d56519df6ed40f0e8e936d57cb656a98ae53da_0"
           },
           "properties": {}
         },
@@ -445,7 +465,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Function 'inject' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
           },
           "locations": [
             {
@@ -467,7 +487,7 @@
             }
           ],
           "fingerprints": {
-            "matchBasedId/v1": "c3ed59d1f7026838d8f2ea05e7b3db6cb408c529cdc4d6285eec5b012f67b2d56cba360878ebe96f21c04b1316bd2564514b68482610bae52eae27cd5d9b32ac_0"
+            "matchBasedId/v1": "d1bdd01dcca7764c5ddb3a7581f97575d20f9b68cda46ef3c645016fcea9346c0cfc05f4531c3ef07fb2543c1f9e55e2dc7c4a2d8158c7df2a1164d0699b87a5_0"
           },
           "properties": {}
         },
@@ -569,7 +589,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+            "text": "There is rarely a good reason to use @csrf_exempt as is used for `redirect_to_polls`."
           },
           "locations": [
             {
@@ -591,7 +611,7 @@
             }
           ],
           "fingerprints": {
-            "matchBasedId/v1": "e4e081bd5bab9123b43ad8a376b8e4c8f09dc6aff231a2d46a5515785b64f548c752fc8acfd361c29147fb324dc47c331c1a236ddfaecd8ed2e4dd116b600d62_0"
+            "matchBasedId/v1": "654ce45bbabb77860b63ab6b64c408259e9263b0ed0b09e241311b92a5ac0c4445f8eb5a7009467b6673581509d0711fe64f45d957939f96bdb7927282eff9df_0"
           },
           "properties": {}
         }
