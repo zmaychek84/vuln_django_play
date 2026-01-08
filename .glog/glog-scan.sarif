@@ -12,255 +12,404 @@
           "informationUri": "https://www.glog.ai",
           "rules": [
             {
-              "id": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
-              "name": "resources.rules.python.xss-render-method",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.xss-render-method"
-              },
-              "fullDescription": {
-                "text": "XSS"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
-              "help": {
-                "text": "XSS\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "XSS\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
-              },
-              "properties": {
-                "precision": "very-high"
-              }
-            },
-            {
               "id": "541ed21d-e25c-3962-944e-84fad2b8e44b",
-              "name": "resources.rules.python.no-csrf-exempt",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
-              },
-              "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"Rare Justification for Using @csrf_exempt in `index`\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "",
+                "markdown": "## Description\n\nThe `@csrf_exempt` decorator in Django is used to disable the cross-site request forgery protection on a particular view. In the given code, it is used on the `index` view. This can lead to a security vulnerability where an attacker can trick a victim into making a request that the victim did not intend to make.\n\nCross-Site Request Forgery (CSRF) is an attack that tricks the victim into submitting a malicious request. It uses the identity and privileges of the victim to perform an undesired function on their behalf.\n\n## Mitigation Advice\n\nThe use of `@csrf_exempt` should be avoided whenever possible. If it is necessary to use it, you should ensure that the view is safe from CSRF attacks. This can be done by checking the origin and referer headers to ensure that the request is coming from a trusted source.\n\n## Source Code Fix Recommendation\n\nRemove the `@csrf_exempt` decorator from the `index` view:\n\n```python\ndef index(request):\n    latest_question_list = Question.objects.order_by('-pub_date')[:5]\n    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django\n- Django's ORM\n\n## References\n\n- [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)\n- [CWE-352: Cross-Site Request Forgery (CSRF)](https://cwe.mitre.org/data/definitions/352.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-352",
+                    "url": "https://cwe.mitre.org/data/definitions/352.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-352"
+                ]
               }
             },
             {
-              "id": "faaac48b-e09e-3c39-906c-cfda2ad85f71",
-              "name": "resources.rules.python.no-csrf-exempt",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
-              },
-              "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "id": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
+              "name": "Cross-Site Scripting Vulnerability",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "",
+                "markdown": "## Description\n\nCross-Site Scripting (XSS) vulnerabilities occur when an application includes untrusted data in a new web page without proper validation or escaping, or updates an existing web page with user-supplied data using a browser API that can create HTML or JavaScript. XSS allows attackers to execute scripts in the victim's browser which can hijack user sessions, deface web sites, or redirect the user to malicious sites.\n\nIn the context of Python, particularly with Django framework, this vulnerability can occur if user input is directly rendered on the webpage without proper sanitization.\n\n## Mitigation Advice\n\nTo mitigate XSS vulnerabilities in Python, particularly in Django, you should:\n\n- Always use Django's built-in templating engine which automatically escapes variables unless explicitly told not to. This helps prevent XSS attacks by ensuring that any user-supplied input is properly escaped before it is included in the output page.\n- Avoid using functions that can introduce XSS vulnerabilities such as `mark_safe`, `safe`, `unescape`, `serialize` etc. unless absolutely necessary.\n- Validate and sanitize user input before using it. This can be done using Django's form and model field validation.\n- Use Content Security Policy (CSP) headers to restrict the sources of scripts and other resources that can be loaded on your pages.\n\n## Source Code Fix Recommendation\n\nIn your provided code, Django's templating engine is used which automatically escapes variables. So, it's already safe from XSS attacks unless you're using `mark_safe` or `safe` in your templates.\n\n```python\ncontext = { 'latest_question_list': latest_question_list, }\nreturn render(request, 'polls/index.html', context)\n```\n\n## Library Dependencies\n\nThe code example provided is using Django, a high-level Python Web framework. So, Django is the only dependency required for the code to execute properly.\n\n## References\n\n- [OWASP Cross-Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)\n- [OWASP Python Security - Cross-Site Scripting](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79"
+                ]
               }
             },
             {
               "id": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
-              "name": "resources.rules.python.direct-use-of-httpresponse",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.direct-use-of-httpresponse"
-              },
-              "fullDescription": {
-                "text": "Detected data rendered directly to the end user via 'HttpResponse'\nor a similar object. This bypasses Django's built-in cross-site scripting\n(XSS) defenses and could result in an XSS vulnerability. Use Django's\ntemplate engine to safely render HTML.\n"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "Direct Data Rendering Bypassing Django's XSS Defenses Vulnerability",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Detected data rendered directly to the end user via 'HttpResponse'\nor a similar object. This bypasses Django's built-in cross-site scripting\n(XSS) defenses and could result in an XSS vulnerability. Use Django's\ntemplate engine to safely render HTML.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Detected data rendered directly to the end user via 'HttpResponse'\nor a similar object. This bypasses Django's built-in cross-site scripting\n(XSS) defenses and could result in an XSS vulnerability. Use Django's\ntemplate engine to safely render HTML.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://docs.djangoproject.com/en/3.1/intro/tutorial03/#a-shortcut-render](https://docs.djangoproject.com/en/3.1/intro/tutorial03/#a-shortcut-render)\n - [https://docs.djangoproject.com/en/3.1/topics/http/shortcuts/#render](https://docs.djangoproject.com/en/3.1/topics/http/shortcuts/#render)\n"
+                "text": "",
+                "markdown": "## Description\n\nDirect Data Rendering Bypassing Django's XSS Defenses Vulnerability in Python refers to a security flaw where an application directly renders data without properly sanitizing it. This can lead to Cross-Site Scripting (XSS) attacks, where an attacker can inject malicious scripts into web pages viewed by other users. In this case, the vulnerability sink is the `HttpResponse` function, which is directly rendering the `question_id` without any sanitization or encoding.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always sanitize and validate any user-supplied data before rendering it. This can be done by using Django's built-in escaping functions, or by using a library such as Django's `bleach` to sanitize the data.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the vulnerability sink:\n\n```python\nfrom django.utils.html import escape\n\ndef some_view(request, question_id):\n    response = \"Some response with %s\"\n    safe_question_id = escape(question_id)\n    return HttpResponse(response % safe_question_id)\n```\n\nIn this fix, the `escape` function from Django's `django.utils.html` module is used to sanitize the `question_id` before it is rendered.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django\n\n## References\n\n- [OWASP XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79"
+                ]
+              }
+            },
+            {
+              "id": "e73fe9d3-f00e-3484-b5e1-67bc6c410d11",
+              "name": "High-Risk Vulnerability Detected in Version 3.0.4, Resolved in Versions 3.2.15 and 4.0.7",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nA high-risk vulnerability was detected in Django version 3.0.4. This vulnerability could allow an attacker to execute arbitrary code, potentially taking control of the system. This is a serious security concern as it could lead to unauthorized access and manipulation of data, disruption of service, and other malicious activities.\n\n## Security Concern\n\nThis vulnerability is a security concern because it allows an attacker to exploit the system by executing arbitrary code. This could lead to unauthorized access to sensitive data, disruption of service, and other malicious activities. The attacker could potentially gain full control of the system, which could have severe consequences for the organization.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to upgrade Django to version 3.2.15 or 4.0.7, which have resolved this issue. Regularly updating and patching software is a crucial part of maintaining secure systems. It is also recommended to use secure coding practices to prevent such vulnerabilities from occurring in the first place.\n\n## Source Code Fix Recommendation\n\nUpgrade your Django version in your requirements.txt file:\n\n```\nDjango==3.2.15\n```\nor\n```\nDjango==4.0.7\n```\n\nThen, update your dependencies:\n\n```\npip install -r requirements.txt\n```\n\n## Library Dependencies\n\nThe code example requires the Django library to execute properly.\n\n## OWASP Resources\n\n- [OWASP Top 10](https://owasp.org/www-project-top-ten/)\n- [OWASP Code Review Guide](https://owasp.org/www-pdf-archive/OWASP_Code_Review_Guide_v2.pdf)\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-94: Improper Control of Generation of Code ('Code Injection')](https://cwe.mitre.org/data/definitions/94.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-94",
+                    "url": "https://cwe.mitre.org/data/definitions/94.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-94"
+                ]
               }
             },
             {
               "id": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
-              "name": "resources.rules.python.missing-ratelimit",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
-              },
-              "fullDescription": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"@csrf_exempt Usage Detected Indicating Potential CSRF Token Vulnerability\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+                "text": "",
+                "markdown": "## Description\n\nThe `@csrf_exempt` decorator in Django Python framework is used to bypass the Cross-Site Request Forgery (CSRF) protection for a particular view. If this decorator is used without proper caution, it can lead to CSRF vulnerabilities. CSRF is an attack that tricks the victim into submitting a malicious request. It uses the identity and privileges of the victim to perform an undesired function on their behalf.\n\nIn the provided code, the `results` view is exempted from CSRF protection, which means that it can potentially be exploited by CSRF attacks.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should avoid using the `@csrf_exempt` decorator unless it's absolutely necessary. If you must use it, ensure that the view does not perform any state-changing operations or any operations that need to be protected.\n\n## Source Code Fix Recommendation\n\nRemove the `@csrf_exempt` decorator from the view:\n\n```python\ndef results(request, question_id):\n    response = \"You're looking at the results of question %s.\"\n    return HttpResponse(response % question_id)\n```\n\n## Library Dependencies\n\nThe code example requires Django, a high-level Python Web framework.\n\n## References\n\n- [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)\n- [CWE-352: Cross-Site Request Forgery (CSRF)](https://cwe.mitre.org/data/definitions/352.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-352",
+                    "url": "https://cwe.mitre.org/data/definitions/352.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-352"
+                ]
               }
             },
             {
-              "id": "c8caa4a7-82a8-3f68-8786-af1c67fe1baa",
-              "name": "resources.rules.python.no-csrf-exempt",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
-              },
-              "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "id": "faaac48b-e09e-3c39-906c-cfda2ad85f71",
+              "name": "\"Rare Justification for Using @csrf_exempt in `detail`\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "",
+                "markdown": "## Description\n\nThe `@csrf_exempt` decorator in Django is used to disable the cross-site request forgery (CSRF) protection on a particular view. CSRF is an attack that tricks the victim into submitting a malicious request. It uses the identity and privileges of the victim to perform an undesired function on their behalf.\n\nIn the provided code, the `detail` view is exempted from CSRF protection. This means that if an attacker can trick a user into clicking a link or submitting a form, the attacker can perform actions with the same permissions as the user, without the user's knowledge or consent.\n\n## Mitigation Advice\n\nThe use of `@csrf_exempt` should be avoided whenever possible, as it opens up potential security vulnerabilities. If you must use it, ensure that the view does not change the state of the system. If the view does change the state of the system, ensure that you have other protections in place, such as checking the HTTP `Referer` header.\n\n## Source Code Fix Recommendation\n\nRemove the `@csrf_exempt` decorator from the view:\n\n```python\ndef detail(request, question_id):\n    question = get_object_or_404(Question, pk=question_id)\n    return render(request, 'polls/results.html', {'question': question})\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django\n- Django's `get_object_or_404` function\n- Django's `render` function\n\n## References\n\n- [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)\n- [CWE-352: Cross-Site Request Forgery (CSRF)](https://cwe.mitre.org/data/definitions/352.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-352",
+                    "url": "https://cwe.mitre.org/data/definitions/352.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-352"
+                ]
+              }
+            },
+            {
+              "id": "32ad4479-f4cd-3e8f-baff-df974a31d043",
+              "name": "\"High Severity Vulnerability in Gunicorn Package, Resolved in Version 22.0.0\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe Gunicorn package in Docker, prior to version 22.0.0, has a high severity vulnerability. This vulnerability allows an attacker to execute arbitrary code remotely, potentially compromising the security of the system. This is a serious security concern as it can lead to unauthorized access and control over the system.\n\n## Security Concern\n\nThis vulnerability is a security concern because it allows an attacker to execute arbitrary code remotely. This means that an attacker could potentially gain unauthorized access to the system, manipulate data, or even take control of the system. This could lead to a variety of negative outcomes, including data loss, data theft, and disruption of services.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to upgrade the Gunicorn package to version 22.0.0 or later. This can be done by updating the package in the requirements.txt file:\n\n```\ngunicorn==22.0.0\n```\n\nAfter updating the package, it is also recommended to run a security scan to ensure that the vulnerability has been properly mitigated.\n\n## Source Code Fix Recommendation\n\nTo fix the vulnerability in the source code, you should update the version of the Gunicorn package in your requirements.txt file:\n\n```\ngunicorn==22.0.0\n```\n\nThen, you should rebuild your Docker image and redeploy your application.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies to execute properly:\n\n- Gunicorn version 22.0.0 or later\n\n## OWASP Resources\n\n- [OWASP Top 10 Security Risks](https://owasp.org/www-project-top-ten/)\n- [OWASP Code Review Guide](https://owasp.org/www-pdf-archive/OWASP_Code_Review_Guide_v2.pdf)\n\n## Common Weakness Enumeration (CWE)\n\n- [CWE-94: Improper Control of Generation of Code ('Code Injection')](https://cwe.mitre.org/data/definitions/94.html)\n\nPlease note that all links have been tested and are active for anonymous users."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-94",
+                    "url": "https://cwe.mitre.org/data/definitions/94.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-94"
+                ]
+              }
+            },
+            {
+              "id": "38a5a5ae-6bf9-3cee-9a79-8c80017c7173",
+              "name": "\"High Severity SQLParse Package Vulnerability (CVE-2024-4340) Resolved in Version 0.5.0\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe High Severity SQLParse Package Vulnerability (CVE-2024-4340) is a critical security flaw found in the SQLParse package version 0.3.1 used in Docker programming language. This vulnerability allows an attacker to execute arbitrary SQL commands via a crafted SQL statement. This is a serious security concern as it can lead to unauthorized access to sensitive data, data corruption, or even system takeover.\n\n## Security Concern\n\nThis vulnerability is a security concern because it allows an attacker to manipulate SQL queries, which can lead to unauthorized access to sensitive data, data corruption, or even system takeover. An attacker can exploit this vulnerability by sending a specially crafted SQL statement that is parsed by the vulnerable SQLParse package. This can lead to a variety of attacks, including SQL Injection, which is a serious security risk.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to upgrade the SQLParse package to version 0.5.0 or later, which contains a fix for this vulnerability. It is also recommended to use parameterized queries or prepared statements to prevent SQL Injection attacks.\n\n## Source Code Fix Recommendation\n\nUpgrade the SQLParse package to version 0.5.0 or later. You can do this by updating the version in your requirements.txt file:\n\n```python\nsqlparse==0.5.0\n```\n\nThen, run the following command to update the package:\n\n```bash\npip install -r requirements.txt\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies to execute properly:\n\n- SQLParse version 0.5.0 or later\n\n## OWASP and CWE Links\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-89"
+                ]
+              }
+            },
+            {
+              "id": "01cd770c-4a42-3209-b0af-4a1cdd0ee379",
+              "name": "High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Docker, a common vulnerability is the lack of specification of a non-root user in the Dockerfile. By default, Docker containers run as root. This means that if an attacker manages to break out of the application running inside the container, they would have root access to the host system, leading to a serious security breach.\n\nThis is a security concern because it gives potential attackers a high level of access to the host system if they manage to exploit a vulnerability in the application or the Docker daemon itself. This could lead to unauthorized access, data theft, or even a complete system takeover.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always specify a non-root user in the Dockerfile that will run the application. This can be done using the `USER` directive. By doing this, even if an attacker manages to break out of the application, they would only have the same permissions as the non-root user, significantly limiting the potential damage they could do.\n\n## Source Code Fix Recommendation\n\nHere is an example of how to specify a non-root user in a Dockerfile:\n\n```Dockerfile\n# Create a group and user\nRUN addgroup -S appgroup && adduser -S appuser -G appgroup\n\n# Tell docker that all future commands should run as the appuser user\nUSER appuser\n```\n\nIn this example, a new group `appgroup` and user `appuser` are created, and then the `USER` directive is used to specify that all future commands should be run as `appuser`.\n\n## References\n\n- [CWE-250: Execution with Unnecessary Privileges](https://cwe.mitre.org/data/definitions/250.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-250",
+                    "url": "https://cwe.mitre.org/data/definitions/250.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-250"
+                ]
+              }
+            },
+            {
+              "id": "d33d0e60-106e-322c-8774-0d2ba2e20c04",
+              "name": "\"Dockerfile Vulnerability: Potential Exposure of Secret Environment Variables in ARG\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\n\"Dockerfile Vulnerability: Potential Exposure of Secret Environment Variables in ARG\" is a security vulnerability that arises when sensitive data, such as passwords, API keys, or other secrets, are exposed in the Dockerfile using the ARG instruction. In the provided code example, the superuser password for Django is being exposed:\n\n```Dockerfile\nARG DJANGO_SUPERUSER_PASSWORD=adminpassword\n```\n\nThis is a security concern because anyone who has access to the Dockerfile can see the superuser password. This could lead to unauthorized access to the Django application, data breaches, and other security issues.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid using the ARG instruction to store sensitive data. Instead, use Docker secrets or environment variables that are not committed with your code. These can be set at runtime, keeping them secure from unauthorized access.\n\n## Source Code Fix Recommendation\n\nInstead of using the ARG instruction, use an environment variable to store the superuser password. This can be done in the Dockerfile like so:\n\n```Dockerfile\nENV DJANGO_SUPERUSER_PASSWORD\n```\n\nThen, when running the Docker container, pass in the superuser password as an environment variable:\n\n```bash\ndocker run -e DJANGO_SUPERUSER_PASSWORD=adminpassword ...\n```\n\n## Library Dependencies\n\nThe provided code example does not require any library dependencies to execute properly.\n\n## OWASP and CWE Resources\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)\n\nPlease note that these links are subject to change and may not be accessible in the future."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-798",
+                    "url": "https://cwe.mitre.org/data/definitions/798.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-798"
+                ]
+              }
+            },
+            {
+              "id": "93ec716e-901d-3d62-9146-94f57845713d",
+              "name": "\"High Severity Vulnerability in urllib3 Version 1.25.8, Resolved in Version 1.26.5 (CVE-2021-33503)\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe vulnerability CVE-2021-33503 is a high severity vulnerability found in urllib3 version 1.25.8. This vulnerability allows a malicious actor to perform a Denial of Service (DoS) attack or possibly execute arbitrary code. The vulnerability is due to the way urllib3 handles certain HTTP responses. An attacker could exploit this vulnerability by sending a specially crafted HTTP response to an affected application, which could cause the application to crash or execute arbitrary code.\n\n## Security Concern\n\nThis vulnerability is a security concern because it allows an attacker to perform a DoS attack or execute arbitrary code. A DoS attack can make an application, service, or entire system unavailable to users. Arbitrary code execution can allow an attacker to take control of an affected system or application, potentially leading to data theft, data corruption, or further system compromise.\n\n## Mitigation Advice\n\nThe recommended mitigation for this vulnerability is to upgrade urllib3 to version 1.26.5 or later, which contains a fix for this vulnerability. If upgrading is not immediately possible, a potential workaround is to add additional validation checks for HTTP responses in your application code.\n\n## Source Code Fix Recommendation\n\nUpgrade urllib3 to version 1.26.5 or later by updating your requirements.txt file:\n\n```python\nurllib3==1.26.5\n```\n\nThen, run the following command to update the package:\n\n```bash\npip install -r requirements.txt\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies to execute properly:\n\n- urllib3 version 1.26.5 or later\n\n## References\n\n- [OWASP Top 10 - A6:2017-Security Misconfiguration](https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration)\n- [CWE-20: Improper Input Validation](https://cwe.mitre.org/data/definitions/20.html)\n\nPlease note that the links provided are valid and active at the time of writing this report."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-20",
+                    "url": "https://cwe.mitre.org/data/definitions/20.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-20"
+                ]
               }
             },
             {
               "id": "793d0960-62fd-3bfa-a339-cc9787415070",
-              "name": "resources.rules.python.missing-ratelimit",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
-              },
-              "fullDescription": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"Rare Justification for Using @csrf_exempt in 'vote': Potential Vulnerability\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+                "text": "",
+                "markdown": "## Description\n\nThe `@csrf_exempt` decorator in Django is used to disable the cross-site request forgery protection on a particular view or function. In the provided code, the `vote` function is exempted from CSRF protection. This can potentially lead to a CSRF attack, where an attacker tricks a victim into performing actions on their behalf.\n\nCross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they're authenticated. If the victim is a normal user, a successful CSRF attack can force the user to perform state changing requests like changing their email address or password. If the victim is an administrative account, CSRF can compromise the entire web application.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should remove the `@csrf_exempt` decorator to enable CSRF protection on the `vote` function. Django has built-in CSRF protection which should be used to protect against such attacks.\n\n## Source Code Fix Recommendation\n\nHere is the fixed code:\n\n```python\nfrom django.views.decorators.csrf import csrf_protect\n\n@csrf_protect\ndef vote(request, question_id):\n    question = get_object_or_404(Question, pk=question_id)\n    try:\n        selected_choice = question.choice_set.get(pk=request.POST['choice'])\n    except (KeyError, Choice.DoesNotExist):\n        # redisplay the question voting form\n        return render(request, 'polls/detail.html', {\n            'question': question,\n            'error_message': \"You didn't select a choice.\",\n        })\n    else:\n        selected_choice.votes += 1\n        selected_choice.save()\n        # Always return an HttpResponseRedirect after successfully dealing\n        # with POST data. This prevents the data from being posted twice if a\n        # user hits the Back button\n        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))\n\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django\n\n## References\n\n- [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)\n- [CWE-352: Cross-Site Request Forgery (CSRF)](https://cwe.mitre.org/data/definitions/352.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-352",
+                    "url": "https://cwe.mitre.org/data/definitions/352.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-352"
+                ]
               }
             },
             {
               "id": "f6772744-842c-3274-81e4-6d921f7ab217",
-              "name": "resources.rules.python.no-csrf-exempt",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.no-csrf-exempt"
-              },
-              "fullDescription": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"@csrf_exempt Usage Detected Indicating Potential CSRF Token Vulnerability\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "There is rarely a good reason to use @csrf_exempt as is used for `$R`.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>"
+                "text": "",
+                "markdown": "## Description\n\nThe `@csrf_exempt` decorator in Django is used to bypass the Cross-Site Request Forgery (CSRF) protection for a particular view. In the provided code, the `inject` function is decorated with `@csrf_exempt`, which means that it does not require a CSRF token to be passed in the request. This can potentially lead to a CSRF attack, where an attacker tricks a victim into performing an action that the victim did not intend to do.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should remove the `@csrf_exempt` decorator to ensure that the CSRF protection is enabled for the view. If you need to disable CSRF protection for a specific reason, you should ensure that the view does not perform any state-changing operations and is safe to be accessed by an attacker.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code:\n\n```python\nfrom django.views.decorators.csrf import csrf_protect\n\n@csrf_protect\ndef inject(request, injector_str):\n    response = \"You're looking at the page that handles injection of %s\"\n    return render(request, 'polls/injector.html', {\n        'injector_str': unquote(injector_str),\n    })\n```\n\nIn this version, the `@csrf_protect` decorator is used to ensure that the CSRF protection is enabled for the view.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django: A high-level Python web framework.\n- urllib: A Python module for fetching URLs.\n\n## References\n\n- [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)\n- [CWE-352: Cross-Site Request Forgery (CSRF)](https://cwe.mitre.org/data/definitions/352.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-352",
+                    "url": "https://cwe.mitre.org/data/definitions/352.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-352"
+                ]
+              }
+            },
+            {
+              "id": "637060ee-db68-331f-9a75-04bcd19e4c0c",
+              "name": "Critical Dockerfile Vulnerability: Potential Exposure of Secret Environment Variables",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe Dockerfile vulnerability \"Potential Exposure of Secret Environment Variables\" is a security concern that arises when sensitive data, such as passwords, API keys, or other secrets, are exposed in Docker images. This can happen when environment variables are used in Dockerfiles to store such sensitive data. In the provided code example, the Django superuser password is stored in an environment variable:\n\n```Dockerfile\nENV DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}\n```\n\nThis is a security concern because Docker images are often shared and can be inspected by anyone who has access to them. If the Dockerfile contains sensitive data, it can be extracted by anyone who can pull the image. This can lead to unauthorized access to systems, data breaches, and other security incidents.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, avoid storing sensitive data in Dockerfiles or Docker images. Instead, use secure methods to handle secrets, such as Docker secrets, Kubernetes secrets, or environment variables that are set at runtime, not build time.\n\n## Source Code Fix Recommendation\n\nInstead of setting the password in the Dockerfile, you can pass it as an environment variable at runtime. Remove the line from the Dockerfile:\n\n```Dockerfile\n# ENV DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}\n```\n\nAnd when running the Docker container, pass the password as an environment variable:\n\n```bash\ndocker run -e DJANGO_SUPERUSER_PASSWORD=your_password your_image\n```\n\n## Library Dependencies\n\nThe provided code example does not require any specific library dependencies to execute properly.\n\n## OWASP and CWE Resources\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)\n\nPlease note that the links provided are valid and active at the time of writing this report."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-798",
+                    "url": "https://cwe.mitre.org/data/definitions/798.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-798"
+                ]
               }
             },
             {
               "id": "4b89bd9f-3874-34d3-974c-1c35e38d992f",
-              "name": "resources.rules.python.missing-ratelimit",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
-              },
-              "fullDescription": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "'Sql_injector' function lacks rate-limiting decorator, potentially causing resource starvation due to high traffic volume.",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+                "text": "",
+                "markdown": "## Description\n\nThe `sql_injector` function in the provided Python code is vulnerable to SQL Injection attacks and Denial of Service (DoS) attacks due to lack of rate limiting. \n\nSQL Injection is a code injection technique that attackers can use to insert malicious SQL statements into input fields for execution. This can lead to unauthorized viewing of data, data manipulation, and data loss.\n\nDoS attacks can occur when an attacker sends a large number of requests to the function, causing resource starvation and potentially making the application unavailable to legitimate users.\n\n## Mitigation Advice\n\nTo mitigate these vulnerabilities, you should:\n\n1. Use parameterized queries or prepared statements instead of string concatenation to prevent SQL Injection attacks.\n2. Implement rate limiting to prevent DoS attacks. This can be done using Django's `ratelimit` decorator.\n\n## Source Code Fix\n\nHere is a recommended fix for the provided code:\n\n```python\nfrom django.views.decorators.csrf import csrf_exempt\nfrom django.views.decorators.ratelimit import ratelimit\nfrom django.db import connection\n\n@csrf_exempt\n@ratelimit(key='ip', rate='10/m')  # Adjust rate as needed\ndef sql_injector(request):\n    sql_str = request.GET.get('sql')\n    with connection.cursor() as cursor:\n        cursor.execute(\"SELECT * FROM my_table WHERE my_field = %s\", [sql_str])\n        sql_results = cursor.fetchall()\n    return render(request, 'polls/sequeleye.html', {\n        'sql_str': sql_str,\n        'sql_results': sql_results,\n    })\n```\n\n## Library Dependencies\n\nThe provided code requires the following libraries to execute properly:\n\n- Django\n- django-ratelimit\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)\n- [CWE-770: Allocation of Resources Without Limits or Throttling](https://cwe.mitre.org/data/definitions/770.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  },
+                  {
+                    "id": "CWE-770",
+                    "url": "https://cwe.mitre.org/data/definitions/770.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-89",
+                  "CWE-770"
+                ]
               }
             },
             {
               "id": "228f29c9-3627-3e05-94dc-b30e7bf3d2c4",
-              "name": "resources.rules.python.sql-injection-db-cursor-execute",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.sql-injection-db-cursor-execute"
-              },
-              "fullDescription": {
-                "text": "Data from request is passed to execute(). This is a SQL injection and could be exploited. See https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection to learn how to mitigate. See https://cwe.mitre.org/data/definitions/89.html to learn about SQLi."
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"SQL Injection Vulnerability Detected in Data Passed to execute() Function\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Data from request is passed to execute(). This is a SQL injection and could be exploited. See https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection to learn how to mitigate. See https://cwe.mitre.org/data/definitions/89.html to learn about SQLi.\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Data from request is passed to execute(). This is a SQL injection and could be exploited. See https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection to learn how to mitigate. See https://cwe.mitre.org/data/definitions/89.html to learn about SQLi.\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection](https://docs.djangoproject.com/en/3.0/topics/security/#sql-injection-protection)\n"
+                "text": "",
+                "markdown": "## Description\n\nThe code snippet provided is vulnerable to SQL Injection, a code injection technique that attackers can use to exploit vulnerabilities in a web application's database layer. This happens when user input is either incorrectly filtered for string literal escape characters embedded in SQL statements or user input is not strongly typed and unexpectedly executed. In this case, the `execute()` function is directly using the input from the user, which is a dangerous practice as it allows an attacker to input malicious SQL queries.\n\n## Mitigation Advice\n\nTo mitigate SQL Injection vulnerabilities, it is recommended to use parameterized queries or prepared statements. This ensures that user input is always treated as literal values and not part of the SQL command. \n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```python\nfrom django.db import connection\n\nuser_input = request.GET['sql']\ncursor = connection.cursor()\n\n# Use parameterized query to prevent SQL Injection\ncursor.execute(\"SELECT * FROM my_table WHERE my_field = %s\", [user_input])\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django: A high-level Python Web framework.\n\n## References\n\n- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)\n- [CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')](https://cwe.mitre.org/data/definitions/89.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-89",
+                    "url": "https://cwe.mitre.org/data/definitions/89.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-89"
+                ]
               }
             },
             {
               "id": "4047b11f-b4db-3de8-8932-a52713c7f1ef",
-              "name": "resources.rules.python.missing-ratelimit",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
-              },
-              "fullDescription": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"Search Function Lacks Rate-Limiting Decorator Vulnerability\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+                "text": "",
+                "markdown": "## Description\n\nThe \"Search Function Lacks Rate-Limiting Decorator Vulnerability\" in Python refers to a situation where a search function does not have a rate-limiting mechanism in place. This can lead to a potential Denial of Service (DoS) attack, where an attacker can send a large number of requests in a short period of time, causing the server to become overwhelmed and potentially crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should implement a rate-limiting mechanism on the search function. This can be done using Django's `ratelimit` decorator. This decorator allows you to specify a rate limit for a view. If the rate limit is exceeded, the decorator will raise a `Ratelimited` exception.\n\n## Source Code Fix Recommendation\n\nHere is how you can modify the code to include a rate-limiting mechanism:\n\n```python\nfrom django_ratelimit.decorators import ratelimit\n\n@csrf_exempt\n@ratelimit(key='ip', rate='10/m')  # limit to 10 requests per minute per IP\ndef search(request, ):\n    was_limited = getattr(request, 'limited', False)\n    if was_limited:\n        # handle rate limit exceeded\n        return HttpResponse('Too many requests', status=429)\n    search_str = request.POST.get('search_string', 'found nothing in search')\n    return render(request, 'polls/search_detail.html', {'search_string': search_str,})\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django\n- django-ratelimit\n\n## References\n\n- [CWE-770: Allocation of Resources Without Limits or Throttling](https://cwe.mitre.org/data/definitions/770.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-770",
+                    "url": "https://cwe.mitre.org/data/definitions/770.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-770"
+                ]
               }
             },
             {
               "id": "d770ea6c-f20e-3971-9419-a5b9cd111d48",
-              "name": "resources.rules.python.missing-ratelimit",
-              "shortDescription": {
-                "text": "Opengrep Finding: resources.rules.python.missing-ratelimit"
-              },
-              "fullDescription": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
-              },
-              "defaultConfiguration": {
-                "enabled": true,
-                "level": "warning"
-              },
+              "name": "\"Rare Justification for Using @csrf_exempt in `redirect_to_polls`\"",
+              "helpUri": "https://www.glog.ai/",
               "help": {
-                "text": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n💎 Enable cross-file analysis and Pro rules for free at sg.run/pro",
-                "markdown": "Function '$FUNC' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n\n\n#### 💎 Enable cross-file analysis and Pro rules for free at <a href='https://sg.run/pro'>sg.run/pro</a>\n\n<b>References:</b>\n - [https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart](https://github.com/jsocol/django-ratelimit/blob/main/docs/index.rst#quickstart)\n"
+                "text": "",
+                "markdown": "## Description\n\nThe `@csrf_exempt` decorator in Django is used to bypass the Cross-Site Request Forgery (CSRF) protection. The `redirect_to_polls` function in the provided code is decorated with `@csrf_exempt`, which means it is not protected against CSRF attacks. CSRF is an attack that tricks the victim into submitting a malicious request. It uses the identity and privileges of the victim to perform an undesired function on their behalf.\n\n## Mitigation Advice\n\nThe use of `@csrf_exempt` should be avoided whenever possible, as it opens up potential security vulnerabilities. If you must use it, ensure that the view does not have any side effects and is safe to be accessed by CSRF attacks.\n\n## Source Code Fix Recommendation\n\nRemove the `@csrf_exempt` decorator to enable CSRF protection on the `redirect_to_polls` function:\n\n```python\ndef redirect_to_polls(request):\n    return HttpResponseRedirect('/polls')\n```\n\nIf you need to disable CSRF protection for a specific reason, consider using other methods that do not expose your application to CSRF attacks. For example, you could use Django's `csrf_protect` decorator on a per-view basis.\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- Django\n\n## References\n\n- [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)\n- [CWE-352: Cross-Site Request Forgery (CSRF)](https://cwe.mitre.org/data/definitions/352.html)"
               },
               "properties": {
-                "precision": "very-high"
+                "cwe": [
+                  {
+                    "id": "CWE-352",
+                    "url": "https://cwe.mitre.org/data/definitions/352.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-352"
+                ]
               }
             }
           ],
@@ -275,42 +424,11 @@
       "language": "en-US",
       "results": [
         {
-          "ruleId": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "XSS"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "polls/views.py",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 48,
-                  "startColumn": 5,
-                  "endLine": 49,
-                  "endColumn": 56,
-                  "snippet": {
-                    "text": "    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)"
-                  }
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "matchBasedId/v1": "1072e0307d73e70b0ca8214a8a75631e14431a277dbd042e58bb7abe1d18bd943f491ba40450208a62f18dcdcd7e6c70e4db607c51bb2b7fb90fbfa169a18c26_0"
-          },
-          "properties": {}
-        },
-        {
           "ruleId": "541ed21d-e25c-3962-944e-84fad2b8e44b",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Function 'index' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+            "text": "'Index' function lacks rate-limiting decorator, risking resource starvation due to high traffic volume."
           },
           "locations": [
             {
@@ -331,17 +449,58 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "8d7e5b20f9094d67a620372c6ba7f01357ff3b8646da8919f6e963206fb8fd2a",
+            "glog-pfp-ruleFileCode/v1": "b71a4bb7d4807d9b631b311b4498a8754d63d7d66b8a69bd5615a6e163a6ca74"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "ab797ce1d17d394d9c68c66a5311203754e8b8e9efd8e67bf7723b252c5223e4cff3094c2fe0ef2ae82bf866e32237a27c1d730e37907954eea08f0dbc84c5e7_0"
+            "glog-fp-ruleFileCode/v1": "b71a4bb7d4807d9b631b311b4498a8754d63d7d66b8a69bd5615a6e163a6ca74"
           },
           "properties": {}
+        },
+        {
+          "ruleId": "e73fe9d3-f00e-3484-b5e1-67bc6c410d11",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "High-Risk Vulnerability in Version 3.0.4 of a Package, Resolved in Versions 2.2.13 and 3.0.7 (CVE-2020-13254)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "requirements.txt",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1,
+                  "endLine": 4,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "Django==3.0.4"
+                  }
+                }
+              },
+              "message": {
+                "text": "requirements.txt: Django@3.0.4"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "be7958be60f8c70596395d377432d2e65bfddf5530c7af77e5fc53da02ac2e44",
+            "glog-pfp-ruleFileCode/v1": "66c89d6d8c07c356bff21e636e013bd533a3f1998784378485b38a4130adaf42"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "66c89d6d8c07c356bff21e636e013bd533a3f1998784378485b38a4130adaf42"
+          }
         },
         {
           "ruleId": "faaac48b-e09e-3c39-906c-cfda2ad85f71",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Function 'detail' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+            "text": "\"Detail\" function lacks rate-limiting decorator, risking resource starvation due to high traffic."
           },
           "locations": [
             {
@@ -362,17 +521,21 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "ff7c2d31972e9cfcd8531923b107d4fb31bf74355150d1f1f81beb19277447a0",
+            "glog-pfp-ruleFileCode/v1": "f13fc7333a747ed8e961881799d23fd6dd556875a0721a7d1b02c29d0fff6678"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "9fece1667ace98e2bd25f1573cda1da9405ad5ccbb35edacf255cd3516f4ae5cc9a7df48dfda7b3eb941be294b5aec55f34715db111c742aa9e131e7dcd345c6_0"
+            "glog-fp-ruleFileCode/v1": "f13fc7333a747ed8e961881799d23fd6dd556875a0721a7d1b02c29d0fff6678"
           },
           "properties": {}
         },
         {
-          "ruleId": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
+          "ruleId": "5f6a2a58-a9e4-32d1-9ae2-76f5dad39bd7",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Detected data rendered directly to the end user via 'HttpResponse' or a similar object. This bypasses Django's built-in cross-site scripting (XSS) defenses and could result in an XSS vulnerability. Use Django's template engine to safely render HTML."
+            "text": "Cross-Site Scripting Vulnerability"
           },
           "locations": [
             {
@@ -382,19 +545,23 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 61,
-                  "startColumn": 12,
-                  "endLine": 61,
-                  "endColumn": 48,
+                  "startLine": 48,
+                  "startColumn": 5,
+                  "endLine": 49,
+                  "endColumn": 56,
                   "snippet": {
-                    "text": "    return HttpResponse(response % question_id)"
+                    "text": "    context = { 'latest_question_list': latest_question_list, }\n    return render(request, 'polls/index.html', context)"
                   }
                 }
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "7f0dfb76dcb25b3f96a94b17f6e14802f0d625e7c110031585ed2b75d905714c",
+            "glog-pfp-ruleFileCode/v1": "c0c6c7cd00d456ebf9c7b809c072555846d15e4dc094341de788d21307f40dc9"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "6604e0dad5def212a0d78b858ae8fd84a079964ca7007bdc4537161efaf548f1bc64278e3313a21688089e0e9db368212c929124c98929f158b3dd4cfb5db3db_0"
+            "glog-fp-ruleFileCode/v1": "c0c6c7cd00d456ebf9c7b809c072555846d15e4dc094341de788d21307f40dc9"
           },
           "properties": {}
         },
@@ -403,7 +570,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Function 'results' is missing a rate-limiting decorator.\nHigh volume traffic to this function could starve application\nresources. Consider adding rate limiting from a library such\nas 'django-ratelimit'.\n"
+            "text": "\"Function 'results' lacks rate-limiting decorator, risking resource starvation due to high traffic volume.\""
           },
           "locations": [
             {
@@ -424,17 +591,241 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "5be5af5a89bf002e493db111ee23a0fc367663abed3f2a1f778f75f277da7ab8",
+            "glog-pfp-ruleFileCode/v1": "f3859b9c7fadc57bfdd56f626818834dc09c25c3fea563eabcaa63e6246e231a"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "5b79b2ed2fa1db7cd803042a99380c0062546f96c5e47edbf1bfd5fd00a519331eeafb22e5dc9e5b4508076d8ba800f5dd5bb56b22347ad2807fc6080942212f_0"
+            "glog-fp-ruleFileCode/v1": "f3859b9c7fadc57bfdd56f626818834dc09c25c3fea563eabcaa63e6246e231a"
           },
           "properties": {}
+        },
+        {
+          "ruleId": "19cc268b-fdb6-3a45-ba09-c963f54cb99e",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Potential XSS Vulnerability through Direct Data Rendering via HttpResponse in Django"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "polls/views.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 61,
+                  "startColumn": 12,
+                  "endLine": 61,
+                  "endColumn": 48,
+                  "snippet": {
+                    "text": "    return HttpResponse(response % question_id)"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "5b06072c438b884b39b1db4acbd0998c68b68328313dab00a10b9e23c99f2fdd",
+            "glog-pfp-ruleFileCode/v1": "6b2d4a1e145b416dff0835912dd3f16a885ab89111b7e5a3cb4380472e7e03d4"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "6b2d4a1e145b416dff0835912dd3f16a885ab89111b7e5a3cb4380472e7e03d4"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "32ad4479-f4cd-3e8f-baff-df974a31d043",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"High Severity Vulnerability in Version 20.0.4 of a Package, Resolved in Version 22.0.0 (CVE-2024-1135)\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "requirements.txt",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 1,
+                  "endLine": 9,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "gunicorn==20.0.4"
+                  }
+                }
+              },
+              "message": {
+                "text": "requirements.txt: gunicorn@20.0.4"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "72b912917991c48a6ebdabc1578038f8bd5bcfbbb987589494c211b8d0e16ea7",
+            "glog-pfp-ruleFileCode/v1": "4bcf4d0674edbe0bb42af1cb45f29c8cff7687db6b550ce54715459cf78ac9dc"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "4bcf4d0674edbe0bb42af1cb45f29c8cff7687db6b550ce54715459cf78ac9dc"
+          }
+        },
+        {
+          "ruleId": "38a5a5ae-6bf9-3cee-9a79-8c80017c7173",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"High Severity SQLParse Package Vulnerability (CVE-2024-4340) Resolved in Version 0.5.0\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "requirements.txt",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 1,
+                  "endLine": 22,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "sqlparse==0.3.1"
+                  }
+                }
+              },
+              "message": {
+                "text": "requirements.txt: sqlparse@0.3.1"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "a196369d65ea1003d8c5ca254f7565c3a2c05126b1e656b59cb23d37d49516d2",
+            "glog-pfp-ruleFileCode/v1": "a06eef60807f6ed0a82b963125e19f8aaa49c0ea6dc0514e1160e854ae58fb41"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "a06eef60807f6ed0a82b963125e19f8aaa49c0ea6dc0514e1160e854ae58fb41"
+          }
+        },
+        {
+          "ruleId": "93ec716e-901d-3d62-9146-94f57845713d",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"High Severity Vulnerability in urllib3 Package, Resolved in Versions 2.0.6 and 1.26.17\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "requirements.txt",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 1,
+                  "endLine": 24,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "urllib3==1.25.8"
+                  }
+                }
+              },
+              "message": {
+                "text": "requirements.txt: urllib3@1.25.8"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "d3385c95d6c1a58e0ec869ad9e315ac58861c04c43172889cff2a4a18b96c6a4",
+            "glog-pfp-ruleFileCode/v1": "ae884b5f2ccf4ba2caade627a84638da69c3c0f6ff991e23298676c19ffe60fb"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "ae884b5f2ccf4ba2caade627a84638da69c3c0f6ff991e23298676c19ffe60fb"
+          }
+        },
+        {
+          "ruleId": "01cd770c-4a42-3209-b0af-4a1cdd0ee379",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "# Create the \"base\" stage"
+                  }
+                }
+              },
+              "message": {
+                "text": "Dockerfile"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "6e25a19d91b81fca989a8c141f1399ff3d03701cb76ed72ed94c41e401df939c",
+            "glog-pfp-ruleFileCode/v1": "214a42189eecac4754eb121f68790a3856d2bc9716aaebf12d744f2b01f61460"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "214a42189eecac4754eb121f68790a3856d2bc9716aaebf12d744f2b01f61460"
+          }
+        },
+        {
+          "ruleId": "d33d0e60-106e-322c-8774-0d2ba2e20c04",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"Dockerfile Vulnerability: Potential Exposure of Secret Environment Variables in ARG\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 1,
+                  "endLine": 33,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "ARG DJANGO_SUPERUSER_PASSWORD=adminpassword"
+                  }
+                }
+              },
+              "message": {
+                "text": "Dockerfile"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "234c0091939a983c10e646e3e5a83897d9d5c9af4f1d8f98befb8be38e2abc89",
+            "glog-pfp-ruleFileCode/v1": "7f8e14334022620d086492ffb48f966e17d12d97fe4b5a3ee6df0c6c363eab77"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "7f8e14334022620d086492ffb48f966e17d12d97fe4b5a3ee6df0c6c363eab77"
+          }
         },
         {
           "ruleId": "793d0960-62fd-3bfa-a339-cc9787415070",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+            "text": "\"Vote Function Lacks Rate-Limiting Decorator Vulnerability\""
           },
           "locations": [
             {
@@ -455,8 +846,12 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "6f5271f4d6415de4b214f282c369fa594cd94ae0a63372d6dc54d71dd9c54945",
+            "glog-pfp-ruleFileCode/v1": "6f11ba45a5feb18a8e3dbc898755ddc3446936706af72ebf5584957e1c97833b"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "83b0ed1022698caee0021eb4eba3703bfd0e43da6d9c8f94ed8e42a66ff897abc118cfab2e63c9bb11ec6de5b5d56519df6ed40f0e8e936d57cb656a98ae53da_0"
+            "glog-fp-ruleFileCode/v1": "6f11ba45a5feb18a8e3dbc898755ddc3446936706af72ebf5584957e1c97833b"
           },
           "properties": {}
         },
@@ -465,7 +860,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+            "text": "'Inject' function lacks rate-limiting decorator, risking resource starvation due to high traffic volume."
           },
           "locations": [
             {
@@ -486,8 +881,12 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "0882386b4dfc71fb0cd0d7b5264d520ebe6bfebce320c00323d7bba4e9c04398",
+            "glog-pfp-ruleFileCode/v1": "4097d51bfdc1a6cc8cc69d0ab3ed518759aeeb28f801e58ff1606d7b039c4592"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "d1bdd01dcca7764c5ddb3a7581f97575d20f9b68cda46ef3c645016fcea9346c0cfc05f4531c3ef07fb2543c1f9e55e2dc7c4a2d8158c7df2a1164d0699b87a5_0"
+            "glog-fp-ruleFileCode/v1": "4097d51bfdc1a6cc8cc69d0ab3ed518759aeeb28f801e58ff1606d7b039c4592"
           },
           "properties": {}
         },
@@ -496,7 +895,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+            "text": "\"@csrf_exempt Usage Detected Indicating Potential CSRF Token Vulnerability\""
           },
           "locations": [
             {
@@ -517,17 +916,58 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "98f001a5236376f43bee1aeaf8092f27a200766c109645f41e11676832c0b3a8",
+            "glog-pfp-ruleFileCode/v1": "fa5bfa6f6b896d234a8ccd6cec801e2f41e66b9eced3402a4b6de11674407896"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "71739d3249b6f8c2fa70e6ffd177192ff4ff2388b7c639fb4ca8cec18a61e1206f927678b1f62c2c78c7641aeff57942e19cf3d62c170eb132235a66a4a3358e_0"
+            "glog-fp-ruleFileCode/v1": "fa5bfa6f6b896d234a8ccd6cec801e2f41e66b9eced3402a4b6de11674407896"
           },
           "properties": {}
+        },
+        {
+          "ruleId": "637060ee-db68-331f-9a75-04bcd19e4c0c",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Critical Dockerfile Vulnerability: Potential Exposure of Secret Environment Variables"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 1,
+                  "endLine": 38,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "ENV DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}"
+                  }
+                }
+              },
+              "message": {
+                "text": "Dockerfile"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "278fedc6610086aeb2aea232e4c27aa2fec70088266788879530e82bc829faa8",
+            "glog-pfp-ruleFileCode/v1": "c7bd10c8785bf37e912305d8069418b8f7cc13c79361245b346d31dc66e1df07"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "c7bd10c8785bf37e912305d8069418b8f7cc13c79361245b346d31dc66e1df07"
+          }
         },
         {
           "ruleId": "228f29c9-3627-3e05-94dc-b30e7bf3d2c4",
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "User-controlled data from a request is passed to 'execute()'. This could lead to a SQL injection and therefore protected information could be leaked. Instead, use django's QuerySets, which are built with query parameterization and therefore not vulnerable to sql injection. For example, you could use `Entry.objects.filter(date=2006)`."
+            "text": "Potential SQL Injection Risk from Passing User-Controlled Data to 'execute()', Use Django's QuerySets for Protection"
           },
           "locations": [
             {
@@ -548,8 +988,12 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "bbfaec20bc3ff86aa27a22d5b17677ec815794411225d034e054524c07a6a748",
+            "glog-pfp-ruleFileCode/v1": "070ca10998e54b0bb4ed62fcc7809153e3df4e1e61fd657978e973913c7b59f7"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "b1ae8822951d4511ba0e2f0c53dec77ee005acf716230852b17a60248373f6bbecd85a768f45b758d6147b9786bef7e0b2cc4ef11ffad12b52af98358d366d2d_0"
+            "glog-fp-ruleFileCode/v1": "070ca10998e54b0bb4ed62fcc7809153e3df4e1e61fd657978e973913c7b59f7"
           },
           "properties": {}
         },
@@ -558,7 +1002,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "Detected usage of @csrf_exempt, which indicates that there is no CSRF token set for this route. This could lead to an attacker manipulating the user's account and exfiltration of private data. Instead, create a function without this decorator."
+            "text": "\"Potential Misuse of @csrf_exempt in `search` Function\""
           },
           "locations": [
             {
@@ -579,8 +1023,12 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "838e5c84b48666b93ad6d3ef786c7949934b769d7148274d6f77da6fc7c9edab",
+            "glog-pfp-ruleFileCode/v1": "ec661172d3690f4396d168c7cb7aaa327a482542a5c3abd7854e28df60df100a"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "3dd9d2cc2f0b862196d91252b2181e49977737c00febe887a183fbf9dc82c487821bc55c7406b51eae532960dccffaf436fe09ede57eb35aed676f76105ca203_0"
+            "glog-fp-ruleFileCode/v1": "ec661172d3690f4396d168c7cb7aaa327a482542a5c3abd7854e28df60df100a"
           },
           "properties": {}
         },
@@ -589,7 +1037,7 @@
           "kind": "fail",
           "level": "warning",
           "message": {
-            "text": "There is rarely a good reason to use @csrf_exempt as is used for `redirect_to_polls`."
+            "text": "'Rate-Limiting Decorator Missing in 'redirect_to_polls' Function'"
           },
           "locations": [
             {
@@ -610,8 +1058,12 @@
               }
             }
           ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "2a100d2db6b5fe54bda5ff84cfe27f5cb85fe37876ca5def688933b9651eec11",
+            "glog-pfp-ruleFileCode/v1": "c8517537d28b79cdae4de8a8b835b5df2dd1ecf923341fee43a0cadf7c0006b0"
+          },
           "fingerprints": {
-            "matchBasedId/v1": "654ce45bbabb77860b63ab6b64c408259e9263b0ed0b09e241311b92a5ac0c4445f8eb5a7009467b6673581509d0711fe64f45d957939f96bdb7927282eff9df_0"
+            "glog-fp-ruleFileCode/v1": "c8517537d28b79cdae4de8a8b835b5df2dd1ecf923341fee43a0cadf7c0006b0"
           },
           "properties": {}
         }
